@@ -1,0 +1,28 @@
+vendor: fortinet
+product: FortiOS
+topic: general hardening and patch management
+---
+
+FortiOS-based FortiGate devices are frequently deployed as branch and
+perimeter firewalls, and have been the subject of several high-severity,
+actively-exploited CVEs (particularly in SSL-VPN components). Hardening
+guidance:
+
+1. Disable the SSL-VPN web portal if it is not actively required; this
+   component has been the source of multiple critical, KEV-listed
+   vulnerabilities allowing unauthenticated remote code execution.
+2. If SSL-VPN is required, ensure it is patched immediately upon any
+   security advisory release -- Fortinet SSL-VPN CVEs have a track record
+   of being weaponized within days of disclosure, sometimes before a patch
+   is even available (requiring temporary mitigations from the vendor
+   advisory).
+3. Restrict administrative access (HTTPS/SSH) to trusted management
+   networks only, and disable HTTP (unencrypted) admin access entirely.
+4. Enable FortiGuard update subscriptions for both firmware and threat
+   intelligence feeds.
+5. Review local-in policies to ensure no unnecessary services are exposed
+   to the WAN interface.
+6. For any FortiOS CVE affecting authentication or session-handling
+   components, treat as maximum priority on internet-facing devices even
+   before checking EPSS, given the vendor's historical exploitation
+   pattern in this specific component class.

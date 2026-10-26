@@ -1,0 +1,29 @@
+vendor: cisco
+product: Cisco IOS XE / Cisco ASA
+topic: general hardening and patch management
+---
+
+Cisco IOS XE and ASA devices are common targets due to their prevalence as
+edge routers, switches, and VPN gateways. Hardening guidance:
+
+1. Disable the web-based management UI on IOS XE devices unless actively
+   required; several major CVEs (including web UI privilege-escalation and
+   remote code execution issues) have specifically targeted this interface
+   when exposed to untrusted networks.
+2. For Cisco ASA VPN gateways, restrict remote-access VPN authentication to
+   use multi-factor authentication, and monitor for anomalous
+   authentication patterns which have preceded exploitation of several
+   ASA CVEs in the wild.
+3. Apply IOS XE and ASA software updates on a defined cadence (monthly
+   review minimum), prioritizing any CVE that appears in CISA's Known
+   Exploited Vulnerabilities catalog -- Cisco edge devices have a strong
+   historical correlation between disclosure and real-world exploitation.
+4. Disable Smart Install and other legacy management protocols not in
+   active use; these have been associated with unauthenticated
+   configuration-manipulation vulnerabilities.
+5. Segment management access using an out-of-band network or ACLs
+   restricting SSH/HTTPS management access to known administrative IP
+   ranges only.
+6. Enable logging to a centralized SIEM/log destination so that exploitation
+   attempts against known CVEs can be detected even if a patch has not
+   yet been applied.

@@ -1,0 +1,28 @@
+vendor: paloalto
+product: PAN-OS
+topic: general hardening and patch management
+---
+
+Palo Alto Networks PAN-OS devices should be kept on a currently supported
+release train and patched promptly, since PAN-OS firewalls are frequently
+internet-facing and are high-value targets. Key hardening steps:
+
+1. Disable management interface access from untrusted zones; management
+   (web UI, SSH, API) should only be reachable from a dedicated management
+   network or via jump host, never directly from the internet.
+2. Enable two-factor authentication for administrative accounts and use
+   role-based access control (RBAC) to limit which admins can make
+   configuration changes versus read-only monitoring.
+3. Subscribe to Palo Alto's security advisories (PAN-SA) and cross-reference
+   any published CVE against the CISA KEV catalog immediately -- PAN-OS
+   vulnerabilities have historically been added to KEV within days of
+   disclosure when actively exploited.
+4. Apply content and threat-prevention updates automatically; these are
+   separate from OS-level patches and address a different class of risk.
+5. For any CVE affecting the GlobalProtect portal or management interface
+   specifically, treat as critical regardless of CVSS score if the device
+   is internet-facing, since these components are the most common initial
+   access vector observed in the wild.
+6. Review and disable unused services (e.g. Telnet, unencrypted HTTP
+   management) which are sometimes left enabled by default on older
+   configurations.

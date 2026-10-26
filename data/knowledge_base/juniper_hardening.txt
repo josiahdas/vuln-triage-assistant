@@ -1,0 +1,24 @@
+vendor: juniper
+product: Junos OS
+topic: general hardening and patch management
+---
+
+Juniper Junos OS devices are commonly deployed as core and edge routers.
+Hardening guidance:
+
+1. Restrict J-Web (web management interface) access to trusted management
+   networks; several Junos CVEs have targeted J-Web specifically, including
+   authentication-bypass and remote code execution chains.
+2. Apply Junos security advisories promptly, particularly for any CVE
+   affecting J-Web or the management daemon (mgd), which have historically
+   been the highest-severity Junos vulnerability class.
+3. Use RADIUS or TACACS+ centralized authentication with role-based access
+   rather than shared local accounts for administrative access.
+4. Disable unused daemons and services (e.g. FTP, Telnet) via the Junos
+   configuration, keeping only required management protocols enabled.
+5. For internal-only devices with no direct internet exposure, patching
+   urgency can reasonably be lower than for edge-facing Junos devices,
+   but should still follow a defined patch cadence rather than being
+   deprioritized indefinitely.
+6. Enable and regularly review system logging for authentication attempts
+   and configuration changes.
